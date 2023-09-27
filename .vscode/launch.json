@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Move Api",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/app/main.py",
+        "console": "integratedTerminal",
+        "args": [],
+        "envFile": "${workspaceFolder}/.vscode/.env",
+        // "env": {
+        //   "JWT_SECRET_KEY": "5A1z6a191qCpEg6IJF1378tyqrAAGHMZ"
+        // },
+        // "cwd": "${workspaceFolder}/src/",
+        "justMyCode": false
+      }
+    ]
+  }

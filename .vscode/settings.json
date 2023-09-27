@@ -1,0 +1,18 @@
+{
+  "python.analysis.typeCheckingMode": "basic",
+  "git.ignoreLimitWarning": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "editor.formatOnSave": true,
+  "python.formatting.blackArgs": ["-l 120"],
+  "python.formatting.provider": "none",
+  "python.linting.flake8Enabled": true,
+  "flake8.args": ["--config=.flake8"],
+  "flake8.path": ["flake8"],
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestArgs": [
+    "."
+  ]
+}
