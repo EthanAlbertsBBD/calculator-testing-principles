@@ -1,8 +1,8 @@
 from typing import Any, List
 from domain.movies import MoviesDomain
 from data.actors import ActorDao
-from schemas.responses import Actor, ActorsMovies
-from domain.helper_methods import actor_movies
+from schemas.responses import Actor, PersonMovies, Person
+from domain.helper_methods import person_movies
 
 
 class ActorsDomain:
@@ -27,9 +27,18 @@ class ActorsDomain:
 
         return actors
 
-    def all_actors_movies(self) -> List[ActorsMovies]:
+    def all_actors_movies(self) -> List[PersonMovies]:
         actors = self.all_actors()
         movie_domain = MoviesDomain()
         movies = movie_domain.all_movies()
 
-        return actor_movies(actors, movies)
+        return person_movies(actors, movies)  # type: ignore
+
+    def new_actor(self, actor: Person) -> None:
+        self.data_access.insert_actor(actor)
+
+    def update_actor(self, actor: Actor) -> None:
+        self.data_access.update_actor(actor)
+
+    def delete_actor(self, actor_id: int) -> None:
+        self.data_access.delete_actor(actor_id)

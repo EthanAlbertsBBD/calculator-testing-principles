@@ -1,6 +1,8 @@
 from typing import List
 from data.producers import ProducerDao
-from schemas.responses import Producer
+from schemas.responses import PersonMovies, Person, Producer
+from domain.movies import MoviesDomain
+from domain.helper_methods import person_movies
 
 
 class ProducersDomain:
@@ -24,3 +26,19 @@ class ProducersDomain:
         ]
 
         return producer
+
+    def all_producers_movies(self) -> List[PersonMovies]:
+        producers = self.all_producers()
+        movie_domain = MoviesDomain()
+        movies = movie_domain.all_movies()
+
+        return person_movies(producers, movies)  # type: ignore
+
+    def new_producer(self, producer: Person) -> None:
+        self.data_access.insert_producer(producer)
+
+    def update_producer(self, producer: Producer) -> None:
+        self.data_access.update_producer(producer)
+
+    def delete_producer(self, producer_id: int) -> None:
+        self.data_access.delete_producer(producer_id)
