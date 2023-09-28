@@ -26,17 +26,17 @@ class MovieDao(Base):
 
     def insert_movie(self, movie: MovieInsert) -> Any:
         session = get_session()
-        session.add(
-            MovieDao(
-                moviename=movie.movie_name,
-                releasedate=movie.release_date,
-                runningtime=movie.running_time,
-                moviedescription=movie.movie_description,
-                genre=movie.genre,
-            )
+        added_movie = MovieDao(
+            moviename=movie.movie_name,
+            releasedate=movie.release_date,
+            runningtime=movie.running_time,
+            moviedescription=movie.movie_description,
+            genre=movie.genre,
         )
+        session.add(added_movie)
         session.commit()
-        session.close()
+
+        return added_movie
 
     def update_movie(self, movie: MovieUpdate) -> Any:
         session = get_session()
@@ -58,3 +58,9 @@ class MovieDao(Base):
         session.query(MovieDao).filter(MovieDao.movieid == movie_id).delete()
         session.commit()
         session.close()
+
+    def search_movies(self, movie_name: str) -> List[Any]:
+        session = get_session()
+        movies = session.query(MovieDao).filter(MovieDao.moviename == movie_name).all()
+        session.close()
+        return movies

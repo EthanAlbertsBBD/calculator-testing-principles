@@ -60,3 +60,14 @@ class DirectorDao(Base):
         session.query(DirectorDao).filter(DirectorDao.DirectorID == director_id).delete()
         session.commit()
         session.close()
+
+    def get_director(self, first_name: str, last_name: str) -> Any:
+        session = get_session()
+        director = (
+            session.query(DirectorDao)
+            .filter(DirectorDao.LastName == last_name)
+            .filter(DirectorDao.FirstName == first_name)
+            .first()
+        )
+        session.close()
+        return director

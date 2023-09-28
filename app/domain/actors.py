@@ -1,4 +1,6 @@
 from typing import Any, List
+
+from fastapi import HTTPException
 from domain.movies import MoviesDomain
 from data.actors import ActorDao
 from schemas.responses import Actor, PersonMovies, Person
@@ -42,3 +44,17 @@ class ActorsDomain:
 
     def delete_actor(self, actor_id: int) -> None:
         self.data_access.delete_actor(actor_id)
+
+    def get_actor(self, first_name: str, last_name: str) -> Actor | None:
+        actor = self.data_access.get_actor(first_name, last_name)
+        if actor:
+            return Actor(
+                movie_id=actor.MovieID,
+                first_name=actor.FirstName,
+                last_name=actor.LastName,
+                birth_date=actor.BirthDate,
+                birth_place=actor.BirthPlace,
+                country_of_birth=actor.CountryOfBirth,
+                actor_id=actor.ActorID,
+            )
+        raise HTTPException(404)

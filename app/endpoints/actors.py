@@ -39,3 +39,9 @@ def put_actor(actor: Actor):
 def delete_actor(actor_id: int):
     actors_domain = ActorsDomain()
     actors_domain.delete_actor(actor_id)
+
+
+@router.get("/search", response_model=Actor | None, operation_id="GetActor")
+def get_actor(first_name: str, last_name: str):
+    actors_domain = ActorsDomain()
+    return actors_domain.get_actor(first_name, last_name)

@@ -60,3 +60,14 @@ class ActorDao(Base):
         session.query(ActorDao).filter(ActorDao.ActorID == actor_id).delete()
         session.commit()
         session.close()
+
+    def get_actor(self, first_name: str, last_name: str) -> Any:
+        session = get_session()
+        actor = (
+            session.query(ActorDao)
+            .filter(ActorDao.LastName == last_name)
+            .filter(ActorDao.FirstName == first_name)
+            .first()
+        )
+        session.close()
+        return actor

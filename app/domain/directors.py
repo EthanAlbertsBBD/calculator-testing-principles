@@ -3,6 +3,7 @@ from domain.helper_methods import person_movies
 from domain.movies import MoviesDomain
 from data.directors import DirectorDao
 from schemas.responses import PersonMovies, Director, Person
+from fastapi import HTTPException
 
 
 class DirectorsDomain:
@@ -42,3 +43,17 @@ class DirectorsDomain:
 
     def delete_director(self, director_id: int) -> None:
         self.data_access.delete_movie(director_id)
+
+    def get_director(self, first_name: str, last_name: str) -> Director | None:
+        director = self.data_access.get_director(first_name, last_name)
+        if director:
+            return Director(
+                movie_id=director.MovieID,
+                first_name=director.FirstName,
+                last_name=director.LastName,
+                birth_date=director.BirthDate,
+                birth_place=director.BirthPlace,
+                country_of_birth=director.CountryOfBirth,
+                director_id=director.DirectorID,
+            )
+        raise HTTPException(404)

@@ -39,3 +39,9 @@ def put_producer(producer: Producer):
 def delete_producer(producer_id: int):
     producers_domain = ProducersDomain()
     producers_domain.delete_producer(producer_id)
+
+
+@router.get("/search", response_model=Producer | None, operation_id="GetProducer")
+def get_producer(first_name: str, last_name: str):
+    director_domain = ProducersDomain()
+    return director_domain.get_producer(first_name, last_name)

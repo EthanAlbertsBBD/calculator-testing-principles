@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from schemas.requests import MovieInsert, MovieUpdate
 
 # from data.access import test
-from schemas.responses import Movie
+from schemas.responses import Movie, MovieTest
 from domain.movies import MoviesDomain
 
 
@@ -14,16 +14,16 @@ router = APIRouter(
 )
 
 
-@router.get("", response_model=List[Movie] | Any, operation_id="GetMovies")
+@router.get("", response_model=MovieTest | Any, operation_id="GetMovies")
 def get_movies():
     movies_domain = MoviesDomain()
-    return movies_domain.all_movies()
+    return MovieTest(movies=movies_domain.all_movies())
 
 
-@router.post("", operation_id="PostMovie")
+@router.post("", response_model=Movie, operation_id="PostMovie")
 def post_movie(movie: MovieInsert):
     movies_domain = MoviesDomain()
-    movies_domain.new_movie(movie)
+    return movies_domain.new_movie(movie)
 
 
 @router.put("", operation_id="PutMovie")
@@ -36,3 +36,9 @@ def put_movie(movie: MovieUpdate):
 def delete_movie(movie_id: int):
     movies_domain = MoviesDomain()
     movies_domain.delete_movie(movie_id)
+
+
+@router.get("/search", response_model=List[Movie] | None, operation_id="GetMovie")
+def get_movie(movie_name: str):
+    movie_domain = MoviesDomain()
+    return movie_domain.search_movies(movie_name)
