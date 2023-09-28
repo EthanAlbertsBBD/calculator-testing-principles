@@ -1,4 +1,5 @@
 from typing import List
+from schemas.requests import MovieInsert, MovieUpdate
 from data.movies import MovieDao
 from schemas.responses import Movie
 
@@ -23,3 +24,12 @@ class MoviesDomain:
         ]
 
         return movies
+
+    def new_movie(self, movie: MovieInsert) -> None:
+        self.data_access.insert_movie(movie)
+
+    def update_movie(self, movie: MovieUpdate) -> None:
+        self.data_access.update_movie(movie)
+
+    def delete_movie(self, movie_id: int) -> None:
+        self.data_access.delete_movie(movie_id)
