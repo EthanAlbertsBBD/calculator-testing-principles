@@ -8,6 +8,17 @@
 	"item": [
 		{
 			"name": "Movies-Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -54,13 +65,13 @@
 			"response": []
 		},
 		{
-			"name": "Movie-Put",
+			"name": "Movies-Put",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"movie_name\": \"string Hello\",\r\n  \"release_date\": \"2023-09-28T11:43:05.043Z\",\r\n  \"running_time\": 0,\r\n  \"movie_description\": \"string\",\r\n  \"genre\": \"string\",\r\n  \"movie_id\": 9\r\n}",
+					"raw": "{\r\n  \"movie_name\": \"The Matrix 2 Elctro Booga Loo\",\r\n  \"release_date\": \"1999-03-31\",\r\n  \"running_time\": 136,\r\n  \"movie_description\": \"Science Fiction, Action\",\r\n  \"genre\": \"string\",\r\n  \"movie_id\": 8\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -76,6 +87,72 @@
 					"port": "8080",
 					"path": [
 						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movies-Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var currentMovieId = pm.environment.get(\"movieId\");\r",
+							"\r",
+							"pm.sendRequest(\"http://localhost:8080/movies\", function (err, response) {\r",
+							"    if (err) {\r",
+							"        console.error(err);\r",
+							"        return;\r",
+							"    }\r",
+							"\r",
+							"    var responseData = response.json();\r",
+							"\r",
+							"    var latestMovieId = -1;\r",
+							"\r",
+							"    // Iterate through the response to find the latest movie ID\r",
+							"    for (var i = 0; i < responseData.length; i++) {\r",
+							"        var movieID = responseData[i].movieID;\r",
+							"        if (movieID > latestMovieId) {\r",
+							"            latestMovieId = movieID;\r",
+							"        }\r",
+							"    }\r",
+							"\r",
+							"    pm.environment.set(\"movieId\", latestMovieId);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies?movie_id={{movieId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies"
+					],
+					"query": [
+						{
+							"key": "movie_id",
+							"value": "{{movieId}}"
+						}
 					]
 				}
 			},
@@ -168,6 +245,32 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "movieId",
+			"value": "-1"
 		}
 	]
 }
