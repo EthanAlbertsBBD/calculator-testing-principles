@@ -36,8 +36,6 @@ class MovieDao(Base):
         session.add(added_movie)
         session.commit()
 
-        return added_movie
-
     def update_movie(self, movie: MovieUpdate) -> Any:
         session = get_session()
         movie_to_update = session.query(MovieDao).filter(MovieDao.movieid == movie.movie_id).first()

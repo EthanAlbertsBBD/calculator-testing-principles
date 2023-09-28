@@ -20,10 +20,10 @@ def get_movies():
     return MovieTest(movies=movies_domain.all_movies())
 
 
-@router.post("", response_model=Movie, operation_id="PostMovie")
+@router.post("", operation_id="PostMovie")
 def post_movie(movie: MovieInsert):
     movies_domain = MoviesDomain()
-    return movies_domain.new_movie(movie)
+    movies_domain.new_movie(movie)
 
 
 @router.put("", operation_id="PutMovie")

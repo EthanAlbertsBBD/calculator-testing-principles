@@ -27,17 +27,8 @@ class MoviesDomain:
 
         return movies
 
-    def new_movie(self, movie: MovieInsert) -> Movie:
-        data = self.data_access.insert_movie(movie)
-
-        return Movie(
-            movie_id=data.movieid,
-            movie_name=data.moviename,
-            release_date=data.releasedate,
-            running_time=data.runningtime,
-            movie_description=data.moviedescription,
-            genre=data.genre,
-        )
+    def new_movie(self, movie: MovieInsert) -> None:
+        self.data_access.insert_movie(movie)
 
     def update_movie(self, movie: MovieUpdate) -> None:
         self.data_access.update_movie(movie)
