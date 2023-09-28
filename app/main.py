@@ -5,7 +5,7 @@ from endpoints import movies, actors, directors, producers
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title="SecHQ Service Catalogue")
+    app = FastAPI(title="Movie Service")
 
     app.include_router(movies.router)
     app.include_router(actors.router)

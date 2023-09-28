@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import List
 from pydantic import BaseModel, Field
 
 
@@ -30,3 +31,7 @@ class Director(Person):
 
 class Producer(Person):
     producer_id: int = Field(..., serialization_alias="producerId")
+
+
+class ActorsMovies(Actor):
+    movie_names: List[str] = Field(..., serialization_alias="movieNames")
