@@ -1,6 +1,8 @@
-from typing import List
+from typing import Any, List
+from domain.movies import MoviesDomain
 from data.actors import ActorDao
-from schemas.responses import Actor
+from schemas.responses import Actor, ActorsMovies
+from domain.helper_methods import actor_movies
 
 
 class ActorsDomain:
@@ -24,3 +26,10 @@ class ActorsDomain:
         ]
 
         return actors
+
+    def all_actors_movies(self) -> List[ActorsMovies]:
+        actors = self.all_actors()
+        movie_domain = MoviesDomain()
+        movies = movie_domain.all_movies()
+
+        return actor_movies(actors, movies)
