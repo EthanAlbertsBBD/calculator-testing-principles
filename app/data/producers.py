@@ -60,3 +60,14 @@ class ProducerDao(Base):
         session.query(ProducerDao).filter(ProducerDao.ProducerID == producer_id).delete()
         session.commit()
         session.close()
+
+    def get_producer(self, first_name: str, last_name: str) -> Any:
+        session = get_session()
+        producer = (
+            session.query(ProducerDao)
+            .filter(ProducerDao.LastName == last_name)
+            .filter(ProducerDao.FirstName == first_name)
+            .first()
+        )
+        session.close()
+        return producer

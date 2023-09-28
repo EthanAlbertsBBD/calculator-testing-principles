@@ -3,6 +3,7 @@ from data.producers import ProducerDao
 from schemas.responses import PersonMovies, Person, Producer
 from domain.movies import MoviesDomain
 from domain.helper_methods import person_movies
+from fastapi import HTTPException
 
 
 class ProducersDomain:
@@ -42,3 +43,17 @@ class ProducersDomain:
 
     def delete_producer(self, producer_id: int) -> None:
         self.data_access.delete_producer(producer_id)
+
+    def get_producer(self, first_name: str, last_name: str) -> Producer | None:
+        producer = self.data_access.get_producer(first_name, last_name)
+        if producer:
+            return Producer(
+                movie_id=producer.MovieID,
+                first_name=producer.FirstName,
+                last_name=producer.LastName,
+                birth_date=producer.BirthDate,
+                birth_place=producer.BirthPlace,
+                country_of_birth=producer.CountryOfBirth,
+                producer_id=producer.ProducerID,
+            )
+        raise HTTPException(404)

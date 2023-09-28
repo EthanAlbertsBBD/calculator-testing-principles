@@ -12,6 +12,10 @@ class Movie(BaseModel):
     genre: str = Field(..., serialization_alias="genre")
 
 
+class MovieTest(BaseModel):
+    movies: List[Movie]
+
+
 class Person(BaseModel):
     movie_id: int = Field(..., serialization_alias="movieID")
     first_name: str = Field(..., serialization_alias="firstName")

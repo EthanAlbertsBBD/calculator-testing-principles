@@ -39,3 +39,9 @@ def put_director(director: Director):
 def delete_director(director_id: int):
     directors_domain = DirectorsDomain()
     directors_domain.delete_director(director_id)
+
+
+@router.get("/search", response_model=Director | None, operation_id="GetDirector")
+def get_director(first_name: str, last_name: str):
+    director_domain = DirectorsDomain()
+    return director_domain.get_director(first_name, last_name)
