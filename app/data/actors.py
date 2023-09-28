@@ -15,7 +15,6 @@ class ActorDao(Base):
     FirstName = Column(String)
     LastName = Column(Integer)
     BirthDate = Column(DateTime)
-    ActorImage = Column(String)
     BirthPlace = Column(String)
     CountryOfBirth = Column(String)
 
@@ -42,7 +41,7 @@ class ActorDao(Base):
 
     def update_actor(self, actor: Actor) -> Any:
         session = get_session()
-        actor_to_update = session.query(ActorDao).filter(ActorDao.ActorID == ActorDao.ActorID).first()
+        actor_to_update = session.query(ActorDao).filter(ActorDao.ActorID == actor.actor_id).first()
 
         if actor_to_update:
             actor_to_update.MovieID = actor.movie_id
@@ -58,6 +57,6 @@ class ActorDao(Base):
 
     def delete_actor(self, actor_id: int) -> Any:
         session = get_session()
-        session.query(ActorDao).filter(ActorDao.actor_id == actor_id).delete()
+        session.query(ActorDao).filter(ActorDao.ActorID == actor_id).delete()
         session.commit()
         session.close()

@@ -15,7 +15,6 @@ class ProducerDao(Base):
     FirstName = Column(String)
     LastName = Column(Integer)
     BirthDate = Column(DateTime)
-    ProducerImage = Column(String)
     BirthPlace = Column(String)
     CountryOfBirth = Column(String)
 
@@ -42,7 +41,7 @@ class ProducerDao(Base):
 
     def update_producer(self, producer: Producer) -> Any:
         session = get_session()
-        producer_to_update = session.query(ProducerDao).filter(ProducerDao.producerID == ProducerDao.producerID).first()
+        producer_to_update = session.query(ProducerDao).filter(ProducerDao.ProducerID == producer.producer_id).first()
 
         if producer_to_update:
             producer_to_update.MovieID = producer.movie_id
@@ -58,6 +57,6 @@ class ProducerDao(Base):
 
     def delete_producer(self, producer_id: int) -> Any:
         session = get_session()
-        session.query(ProducerDao).filter(ProducerDao.producer_id == producer_id).delete()
+        session.query(ProducerDao).filter(ProducerDao.ProducerID == producer_id).delete()
         session.commit()
         session.close()

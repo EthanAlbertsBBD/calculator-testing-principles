@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import APIRouter
-from schemas.responses import Director, PersonMovies
+from schemas.responses import Director, PersonMovies, Person
 from domain.directors import DirectorsDomain
 
 
@@ -21,3 +21,21 @@ def get_directors():
 def get_directors_movies():
     directors_domain = DirectorsDomain()
     return directors_domain.all_directors_movies()
+
+
+@router.post("", operation_id="PostDirector")
+def post_director(director: Person):
+    directors_domain = DirectorsDomain()
+    directors_domain.new_director(director)
+
+
+@router.put("", operation_id="PutDirector")
+def put_director(director: Director):
+    directors_domain = DirectorsDomain()
+    directors_domain.update_director(director)
+
+
+@router.delete("", operation_id="DeleteDirector")
+def delete_director(director_id: int):
+    directors_domain = DirectorsDomain()
+    directors_domain.delete_director(director_id)

@@ -1,9 +1,8 @@
 from typing import Any, List
 from domain.movies import MoviesDomain
 from data.actors import ActorDao
-from schemas.responses import Actor, PersonMovies
+from schemas.responses import Actor, PersonMovies, Person
 from domain.helper_methods import person_movies
-from schemas.responses import Person, Actor
 
 
 class ActorsDomain:

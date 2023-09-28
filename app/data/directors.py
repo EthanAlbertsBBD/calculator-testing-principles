@@ -15,7 +15,6 @@ class DirectorDao(Base):
     FirstName = Column(String)
     LastName = Column(Integer)
     BirthDate = Column(DateTime)
-    DirectorImage = Column(String)
     BirthPlace = Column(String)
     CountryOfBirth = Column(String)
 
@@ -42,7 +41,7 @@ class DirectorDao(Base):
 
     def update_director(self, director: Director) -> Any:
         session = get_session()
-        director_to_update = session.query(DirectorDao).filter(DirectorDao.DirectorID == DirectorDao.DirectorID).first()
+        director_to_update = session.query(DirectorDao).filter(DirectorDao.DirectorID == director.director_id).first()
 
         if director_to_update:
             director_to_update.MovieID = director.movie_id
@@ -58,6 +57,6 @@ class DirectorDao(Base):
 
     def delete_director(self, director_id: int) -> Any:
         session = get_session()
-        session.query(DirectorDao).filter(DirectorDao.director_id == director_id).delete()
+        session.query(DirectorDao).filter(DirectorDao.DirectorID == director_id).delete()
         session.commit()
         session.close()

@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import APIRouter
-from schemas.responses import Actor, PersonMovies
+from schemas.responses import Actor, PersonMovies, Person
 from domain.actors import ActorsDomain
 
 
@@ -21,3 +21,21 @@ def get_actors():
 def get_actors_movies():
     actors_domain = ActorsDomain()
     return actors_domain.all_actors_movies()
+
+
+@router.post("", operation_id="PostActor")
+def post_actor(actor: Person):
+    actors_domain = ActorsDomain()
+    actors_domain.new_actor(actor)
+
+
+@router.put("", operation_id="PutActor")
+def put_actor(actor: Actor):
+    actors_domain = ActorsDomain()
+    actors_domain.update_actor(actor)
+
+
+@router.delete("", operation_id="DeleteActor")
+def delete_actor(actor_id: int):
+    actors_domain = ActorsDomain()
+    actors_domain.delete_actor(actor_id)
