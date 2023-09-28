@@ -12,12 +12,12 @@ class MoviesDomain:
 
         movies = [
             Movie(
-                movie_id=row.MovieID,
-                movie_name=row.MovieName,
-                release_date=row.ReleaseDate,
-                running_time=row.RunningTime,
-                movie_description=row.MovieDescription,
-                genre=row.Genre,
+                movie_id=row.movieid,
+                movie_name=row.moviename,
+                release_date=row.releasedate,
+                running_time=row.runningtime,
+                movie_description=row.moviedescription,
+                genre=row.genre,
             )
             for row in data
         ]

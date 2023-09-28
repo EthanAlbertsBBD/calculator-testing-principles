@@ -8,15 +8,14 @@ Base = declarative_base()
 
 
 class MovieDao(Base):
-    __tablename__ = "Movies"
+    __tablename__ = "movies"
 
-    MovieID = Column(Integer, primary_key=True)
-    MovieName = Column(String)
-    ReleaseDate = Column(DateTime)
-    RunningTime = Column(Integer)
-    MovieDescription = Column(String)
-    Genre = Column(String)
-    MoviePoster = Column(String)
+    movieid = Column(Integer, primary_key=True)
+    moviename = Column(String)
+    releasedate = Column(DateTime)
+    runningtime = Column(Integer)
+    moviedescription = Column(String)
+    genre = Column(String)
 
     def get_movies(self) -> List[Any]:
         session = get_session()

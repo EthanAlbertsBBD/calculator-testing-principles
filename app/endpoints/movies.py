@@ -1,5 +1,7 @@
-from typing import List
+from typing import Any, List
 from fastapi import APIRouter
+
+# from data.access import test
 from schemas.responses import Movie
 from domain.movies import MoviesDomain
 
@@ -11,7 +13,8 @@ router = APIRouter(
 )
 
 
-@router.get("", response_model=List[Movie], operation_id="GetMovies")
+@router.get("", response_model=List[Movie] | Any, operation_id="GetMovies")
 def get_movies():
     movies_domain = MoviesDomain()
     return movies_domain.all_movies()
+    # test()
