@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Move Api",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/app/main.py",
+        "console": "integratedTerminal",
+        "args": [],
+        "envFile": "${workspaceFolder}/.vscode/.env",
+        "justMyCode": false
+      }
+    ]
+  }
