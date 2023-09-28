@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import APIRouter
-from schemas.responses import Producer
+from schemas.responses import Producer, PersonMovies
 from domain.producers import ProducersDomain
 
 
@@ -15,3 +15,9 @@ router = APIRouter(
 def get_producers():
     producers_domain = ProducersDomain()
     return producers_domain.all_producers()
+
+
+@router.get("/movies", response_model=List[PersonMovies], operation_id="GetProducersMovies")
+def get_producers_movies():
+    producers_domain = ProducersDomain()
+    return producers_domain.all_producers_movies()

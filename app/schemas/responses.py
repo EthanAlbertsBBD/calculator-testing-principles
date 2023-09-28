@@ -33,5 +33,5 @@ class Producer(Person):
     producer_id: int = Field(..., serialization_alias="producerId")
 
 
-class ActorsMovies(Actor):
+class PersonMovies(Person):
     movie_names: List[str] = Field(..., serialization_alias="movieNames")
