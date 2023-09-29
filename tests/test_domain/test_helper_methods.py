@@ -8,11 +8,11 @@ def test_actor_movies():
         actors=[
             Person(
                 movie_id=1,
-                first_name="test",
-                last_name="surname",
+                first_name="Karl",
+                last_name="Haupt",
                 birth_date=datetime.now(),
-                birth_place="test",
-                country_of_birth="test",
+                birth_place="Cape Town",
+                country_of_birth="South Africa",
             )
         ],
         movies=[
@@ -25,6 +25,12 @@ def test_actor_movies():
                 genre="test",
             )
         ],
-    )  # type: ignore
+    )
 
     assert len(res) == 1
+    assert res[0].first_name == "Karl"
+    assert res[0].last_name == "Haupt"
+    assert res[0].birth_place == 'Cape Town'
+    assert res[0].country_of_birth == 'South Africa'
+    assert res[0].movie_id == 1
+    assert res[0].movie_names == ["test"]
