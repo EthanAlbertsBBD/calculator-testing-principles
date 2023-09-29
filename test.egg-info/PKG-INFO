@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: test
+Version: 1.0.0
+Requires-Python: ==3.11.*
+License-File: LICENSE
+Requires-Dist: fastapi[all]==0.101.0
+Requires-Dist: dependency-injector==4.41.0
+Requires-Dist: SQLAlchemy==2.0.19
+Requires-Dist: pyodbc

@@ -2,3 +2,4 @@ fastapi
 sqlalchemy
 pytest
 python-dotenv
+pytest

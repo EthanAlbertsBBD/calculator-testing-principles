@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter
-from schemas.responses import Producer, PersonMovies, Person
-from domain.producers import ProducersDomain
+from app.schemas.responses import Producer, PersonMovies, Person
+from app.domain.producers import ProducersDomain
 
 
 router = APIRouter(

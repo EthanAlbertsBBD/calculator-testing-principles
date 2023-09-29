@@ -1,5 +1,5 @@
 from typing import List
-from schemas.responses import Person, PersonMovies, Movie
+from app.schemas.responses import Person, PersonMovies, Movie
 
 
 def person_movies(actors: List[Person], movies: List[Movie]) -> List[PersonMovies]:

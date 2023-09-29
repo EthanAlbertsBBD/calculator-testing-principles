@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 
-from endpoints import movies, actors, directors, producers
+from app.endpoints import movies, actors, directors, producers
 
 
 def create_app() -> FastAPI:

@@ -1,8 +1,8 @@
 from typing import List
-from data.producers import ProducerDao
-from schemas.responses import PersonMovies, Person, Producer
-from domain.movies import MoviesDomain
-from domain.helper_methods import person_movies
+from app.data.producers import ProducerDao
+from app.schemas.responses import PersonMovies, Person, Producer
+from app.domain.movies import MoviesDomain
+from app.domain.helper_methods import person_movies
 from fastapi import HTTPException
 
 
