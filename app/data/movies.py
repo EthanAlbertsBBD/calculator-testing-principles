@@ -1,7 +1,7 @@
 from typing import Any, List
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
-from schemas.requests import MovieInsert, MovieUpdate
+from app.schemas.requests import MovieInsert, MovieUpdate
 
 from data.access import get_session
 

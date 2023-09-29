@@ -1,0 +1,27 @@
+[build-system]
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'test'
+version = '1.0.0'
+requires-python = '==3.11.*'
+dependencies = [
+    'fastapi[all]==0.101.0',
+    'dependency-injector==4.41.0',
+    'SQLAlchemy==2.0.19',
+    'pyodbc'
+]
+
+[tool.setuptools.packages.find]
+where = ["."]  # list of folders that contain the packages (["."] by default)
+include = ["app*"]  # package names should match these glob patterns (["*"] by default)
+
+[tool.ruff]
+line-length = 120
+
+[tool.black]
+color = true
+line-length = 120
+target-version = ['py311']
+skip-string-normalization = true

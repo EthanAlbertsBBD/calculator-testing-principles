@@ -1,10 +1,10 @@
 from typing import Any, List
 
 from fastapi import HTTPException
-from domain.movies import MoviesDomain
+from app.domain.movies import MoviesDomain
 from data.actors import ActorDao
-from schemas.responses import Actor, PersonMovies, Person
-from domain.helper_methods import person_movies
+from app.schemas.responses import Actor, PersonMovies, Person
+from app.domain.helper_methods import person_movies
 
 
 class ActorsDomain:

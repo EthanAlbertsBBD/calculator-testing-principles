@@ -1,9 +1,9 @@
 from typing import List
 
 from fastapi import HTTPException
-from schemas.requests import MovieInsert, MovieUpdate
-from data.movies import MovieDao
-from schemas.responses import Movie
+from app.schemas.requests import MovieInsert, MovieUpdate
+from app.data.movies import MovieDao
+from app.schemas.responses import Movie
 
 
 class MoviesDomain:

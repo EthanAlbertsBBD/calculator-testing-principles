@@ -1,8 +1,8 @@
 from typing import Any, List
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
-from schemas.responses import Person, Producer
-from data.access import get_session
+from app.schemas.responses import Person, Producer
+from app.data.access import get_session
 
 Base = declarative_base()
 

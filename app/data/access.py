@@ -7,7 +7,7 @@ load_dotenv()
 password = os.environ.get("DB_PASSWORD", "")
 
 engine = db.create_engine(
-    f"mssql+pyodbc://sa:{password}@.\\LOCAL/MovieDB?driver=ODBC Driver 17 for SQL Server"
+    f"mssql+pyodbc://movie_user:{password}@localhost/MovieDB?driver=ODBC Driver 17 for SQL Server"
 )
 
 
