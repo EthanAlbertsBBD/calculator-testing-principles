@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "62ad92ee-6331-475a-9074-0a877b2ec12f",
+		"_postman_id": "10ae4567-fe23-4f6a-9311-65c955abd8fc",
 		"name": "Movie-Database",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26517441"
+		"_exporter_id": "16162963"
 	},
 	"item": [
 		{
@@ -20,6 +20,7 @@
 							"pm.test(\"Response should return an array called movies\", function () {\r",
 							"    let jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.movies).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData.movies).to.not.be.null;\r",
 							"});\r",
 							"\r",
 							"pm.test(\"Response should return an array with Movie Object\", function () {\r",
@@ -31,9 +32,16 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/movies",
 					"protocol": "http",
@@ -43,6 +51,56 @@
 					"port": "8080",
 					"path": [
 						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movies-search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should return an array of producers\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should include these properites\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.keys('movieID','movieName','releaseDate', 'runningTime', 'movieDescription', 'genre' )\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/search?movie_name=Ghostbusters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "movie_name",
+							"value": "Ghostbusters"
+						}
 					]
 				}
 			},
@@ -205,7 +263,20 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should return an array of actors\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should include these properites\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.keys('movieID','firstName','lastName', 'birthPlace', 'countryOfBirth', 'actorId' )\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -230,6 +301,30 @@
 		},
 		{
 			"name": "Actors-Movies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should return an array of actors/movies\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should include these properites\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.keys('movieID','firstName','lastName', 'birthPlace', 'countryOfBirth', 'movieNames' )\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -249,7 +344,204 @@
 			"response": []
 		},
 		{
+			"name": "Actors-Search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should return an array of producers\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should include these properites\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.keys('movieID','firstName','lastName', 'birthPlace', 'countryOfBirth', 'actorId' )\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actors/search?first_name=Dan&last_name=Aykroyd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"search"
+					],
+					"query": [
+						{
+							"key": "first_name",
+							"value": "Dan"
+						},
+						{
+							"key": "last_name",
+							"value": "Aykroyd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actors-Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"movie_id\": 1,\r\n  \"first_name\": \"Kyle\",\r\n  \"last_name\": \"Fortuin\",\r\n  \"birth_date\": \"2023-09-28T18:26:35.732Z\",\r\n  \"birth_place\": \"Cape Town\",\r\n  \"country_of_birth\": \"South Africa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/actors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actors-Put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"movie_id\": 1,\r\n  \"first_name\": \"KYLE\",\r\n  \"last_name\": \"TEST\",\r\n  \"birth_date\": \"2023-09-28T18:34:52.262Z\",\r\n  \"birth_place\": \"TEST\",\r\n  \"country_of_birth\": \"TEST\",\r\n  \"actor_id\": 43\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/actors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actors-Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actors?actor_id=43",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors"
+					],
+					"query": [
+						{
+							"key": "actor_id",
+							"value": "43"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Directors",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should return an array of directors\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should include these properites\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.keys('movieID','firstName','lastName', 'birthPlace', 'countryOfBirth', 'directorId' )\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -268,7 +560,247 @@
 			"response": []
 		},
 		{
+			"name": "Director-Movies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should return an array of directors\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should include these properites\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.keys('movieID','firstName','lastName', 'birthPlace', 'countryOfBirth', 'movieNames' )\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/directors/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"directors",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Director-Search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response User Not Found\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.keys('detail' );\r",
+							"    pm.expect(jsonData['detail']).to.eql(\"Not Found\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/directors/search?first_name=Karl&last_name=Haupt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"directors",
+						"search"
+					],
+					"query": [
+						{
+							"key": "first_name",
+							"value": "Karl"
+						},
+						{
+							"key": "last_name",
+							"value": "Haupt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Directors-Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 500\", function () {\r",
+							"    pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"movie_id\": 2,\r\n  \"first_name\": \"Jordan\",\r\n  \"last_name\": \"Fulk\",\r\n  \"birth_date\": \"2023-09-28T18:44:04.337Z\",\r\n  \"birth_place\": \"England\",\r\n  \"country_of_birth\": \"United Kindom\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/directors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"directors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Directors-Put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"movie_id\": 1,\r\n  \"first_name\": \"string\",\r\n  \"last_name\": \"string\",\r\n  \"birth_date\": \"2023-09-28T18:55:15.284Z\",\r\n  \"birth_place\": \"string\",\r\n  \"country_of_birth\": \"string\",\r\n  \"director_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/directors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"directors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Directors-Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/directors?director_id=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"directors"
+					],
+					"query": [
+						{
+							"key": "director_id",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Producers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should return an array of producers\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should include these properites\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.keys('movieID','firstName','lastName', 'birthPlace', 'countryOfBirth', 'producerId' )\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -281,6 +813,215 @@
 					"port": "8080",
 					"path": [
 						"producers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producers-Movies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should return an array of producers movies\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should include these properites\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.keys('movieID','firstName','lastName', 'birthPlace', 'countryOfBirth', 'movieNames' )\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/producers/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producers",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producers-Search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should return an array of producers\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should include these properites\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.keys('movieID','firstName','lastName', 'birthPlace', 'countryOfBirth', 'producerId' )\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/producers/search?first_name=Ivan&last_name=Reitman",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producers",
+						"search"
+					],
+					"query": [
+						{
+							"key": "first_name",
+							"value": "Ivan"
+						},
+						{
+							"key": "last_name",
+							"value": "Reitman"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producers-Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"movie_id\": 1,\r\n  \"first_name\": \"Alwyn\",\r\n  \"last_name\": \"Lie\",\r\n  \"birth_date\": \"2023-09-28T19:25:01.599Z\",\r\n  \"birth_place\": \"Cape Town\",\r\n  \"country_of_birth\": \"South Africa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/producers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producers-Put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/producers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Producers-Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/producers?producer_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"producers"
+					],
+					"query": [
+						{
+							"key": "producer_id",
+							"value": "1"
+						}
 					]
 				}
 			},
