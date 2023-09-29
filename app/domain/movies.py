@@ -36,7 +36,7 @@ class MoviesDomain:
     def delete_movie(self, movie_id: int) -> None:
         self.data_access.delete_movie(movie_id)
 
-    def search_movies(self, movie_name: str) -> List[Movie] | None:
+    def search_movies(self, movie_name: str) -> List[Movie]:
         res = self.data_access.search_movies(movie_name)
         if res:
             movies = [

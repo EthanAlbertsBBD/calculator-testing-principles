@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
 from app.schemas.requests import MovieInsert, MovieUpdate
 
-from data.access import get_session
+from app.data.access import get_session
 
 Base = declarative_base()
 
@@ -57,8 +57,11 @@ class MovieDao(Base):
         session.commit()
         session.close()
 
-    def search_movies(self, movie_name: str) -> List[Any]:
+    def search_movies(self, movie_name: str) -> List[Any] | None:
         session = get_session()
         movies = session.query(MovieDao).filter(MovieDao.moviename == movie_name).all()
         session.close()
-        return movies
+
+        if len(movies) > 0:
+            return movies
+        return None
