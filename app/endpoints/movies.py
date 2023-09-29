@@ -1,8 +1,6 @@
 from typing import Any, List
 from fastapi import APIRouter
 from app.schemas.requests import MovieInsert, MovieUpdate
-
-# from data.access import test
 from app.schemas.responses import Movie, MovieTest
 from app.domain.movies import MoviesDomain
 
